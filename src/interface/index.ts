@@ -11,3 +11,9 @@
      }
   }
   
+export interface IInputForm{
+    id: string;
+    name: "title" | "description" | "imageUrl" | "price"
+    type: string;
+    label: string;
+  }

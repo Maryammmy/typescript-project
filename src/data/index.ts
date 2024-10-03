@@ -1,4 +1,4 @@
-import { Item } from "../interface";
+import { IInputForm, Item } from "../interface";
 
  export const items: Item[] = [
     {
@@ -112,4 +112,30 @@ import { Item } from "../interface";
 
   ];
   
+export const inputForm: IInputForm[] = [
+   {
+      id: "title",
+      name: "title",
+      label: "Product Title",
+      type:"text",
+   },
+   {
+      id: "description",
+      name: "description",
+      label: "Product Description",
+      type:"text",
+   },
+   {
+      id: "imageUrl",
+      name: "imageUrl",
+      label: "Product Image Url",
+      type:"text",
+   },
+   {
+      id: "price",
+      name: "price",
+      label: "Product Price",
+      type:"text",
+     },
+  ]
   
