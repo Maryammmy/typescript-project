@@ -1,5 +1,5 @@
  export interface Item {
-    id?: number;
+    id?: string | undefined;
     title: string;
     description: string;
      color: string[];

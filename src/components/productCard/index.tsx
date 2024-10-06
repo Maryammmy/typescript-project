@@ -1,5 +1,6 @@
 import { Item } from "../../interface"
 import { textSlicer } from "../../utils/function"
+import CircleColor from "../CircleColor"
 import Image from "../Image"
 import Button from "../ui/Button"
 
@@ -11,13 +12,12 @@ function ProductCard({ product }: IProps) {
     const  {title,description,imageUrl, price,color} =product
   return (
       <div className="border rounded-md p-2 max-w-sm">
+          <Image imageUrl={imageUrl} alt="product name" className="w-full rounded-md" />
           <h3>{title}</h3>
-          <Image imageUrl={imageUrl} alt="product name" className="w-full rounded-md"/>
           <p className="pt-2">{textSlicer(description)}</p>
-          <div className="flex space-x-2 mt-2">
-            {color.map((color,index)=>  <span key={index} className={`w-5 h-5 bg-${color} rounded-full`}></span>
-              )}
-          </div>
+          <div className="flex flex-wrap gap-1">
+              {color.map((item, index) => <CircleColor key={index} color={item} />)}
+            </div>
           <div className="flex justify-between items-center">
               <span>{price}</span>
               <div> <Image imageUrl="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?cs=srgb&dl=pexels-pixabay-210019.jpg&fm=jpg" alt="product name" className="w-10 h-10 rounded-full object-cover"/></div>

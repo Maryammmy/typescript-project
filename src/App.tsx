@@ -1,15 +1,20 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import ProductCard from "./components/productCard"
 import Modal from "./components/ui/Modal"
-import { inputForm, items } from "./data"
+import { colors, inputForm, items } from "./data"
 import Button from "./components/ui/Button"
 import Input from "./components/ui/Input"
 import { Validation } from "./validation"
 import ErrorMsg from "./components/ErrorMsg"
+import CircleColor from "./components/CircleColor"
+import { Item } from "./interface"
+import { v4 as uuid } from "uuid";
 
 
 
 function App() {
+
+  
   const defaultProduct={
     title: "",
     description: "",
@@ -23,6 +28,8 @@ function App() {
   }
   const [isOpen, setIsOpen] = useState(false)
   const [product, setProduct] = useState(defaultProduct)
+  const [products,setProducts] =useState<Item[]>(items)
+  const [tempColors,setTempColors] =useState<string[]>([])
   const [errors, setErrors] = useState({
     title:"",
     description:"",
@@ -34,6 +41,10 @@ function App() {
     setProduct({
       ...product,
       [name]:value
+    })
+    setErrors({
+      ...errors,
+      [name]:""
     })
   }
   function open() {
@@ -57,16 +68,27 @@ function App() {
       setErrors(errors)
       return;
     }
-    console.log(hasErrorMsg)
-    // console.log(product)
-    // console.log(errors)
+    setProducts(prev => [{ ...product, id: uuid(), color: tempColors }, ...prev])
+    setProduct(defaultProduct)
+    setTempColors([])
+    console.log("success")
+    console.log(products)
   }
-  const productList = items.map((product,index) => <ProductCard key={index} product={product} />)
+  const productList = products.map((product,index) => <ProductCard key={index} product={product} />)
   const form = inputForm.map(input => <div key={input.id} className="flex flex-col">
     <label htmlFor={input.id}>{input.label}</label>
     <Input onChange={onChangeHandler} id={input.id} name={input.name} value={product[input.name]} />
     <ErrorMsg msg={errors[input.name]} />
   </div>)
+  const colorsList = colors.map((color, index) => <CircleColor onClick={() => 
+  {
+    if (tempColors.includes(color)) {
+      setTempColors(prev => prev.filter(item => item !== color))
+      return;
+    }
+    setTempColors((prev) => [...prev, color])
+  }
+  } key={index} color={color} />)
   return (
     <main className="container">
       <Button className="bg-blue-500  hover:bg-blue-400" onClick={open}>Add</Button>
@@ -76,7 +98,13 @@ function App() {
       <Modal isOpen={isOpen} close={close} title="Add product">
         <form className="space-y-3" onSubmit={onSubmitHandler }>
           {form}
-          <div className="flex justify-between space-x-3 mt-3">
+          <div className="flex flex-wrap gap-1">
+            {colorsList}
+          </div>
+          <div className="flex flex-wrap">
+            {tempColors.map((color, index) => <span style={{backgroundColor:color}} className="text-white mb-1 p-1 rounded-md ms-1" key={index}>{color}</span>)}
+          </div>
+          <div className="flex justify-between space-x-3 ">
         <Button className="bg-red-500  hover:bg-red-400" onClick={cancelForm}>Cancel</Button>
         <Button className="bg-blue-500  hover:bg-blue-400">Submit</Button>
        </div>
