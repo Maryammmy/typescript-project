@@ -9,7 +9,7 @@ product:Item
 }
 
 function ProductCard({ product }: IProps) {
-    const  {title,description,imageUrl, price,color} =product
+    const  {title,description,imageUrl, price,color,category} =product
   return (
       <div className="border rounded-md p-2 max-w-sm">
           <Image imageUrl={imageUrl} alt="product name" className="w-full rounded-md" />
@@ -19,8 +19,8 @@ function ProductCard({ product }: IProps) {
               {color.map((item, index) => <CircleColor key={index} color={item} />)}
             </div>
           <div className="flex justify-between items-center">
-              <span>{price}</span>
-              <div> <Image imageUrl="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?cs=srgb&dl=pexels-pixabay-210019.jpg&fm=jpg" alt="product name" className="w-10 h-10 rounded-full object-cover"/></div>
+        <span>{price}</span>
+              <div> <Image imageUrl={category.imageUrl} alt="product name" className="w-10 h-10 rounded-full object-cover"/></div>
           </div>
           <div className="flex justify-between space-x-2 my-2">
               <Button className="bg-blue-500" onClick={() => {

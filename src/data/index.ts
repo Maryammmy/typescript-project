@@ -1,4 +1,4 @@
-import { IInputForm, Item } from "../interface";
+import { ICategory, IInputForm, Item } from "../interface";
 import { v4 as uuid } from "uuid";
  export const items: Item[] = [
     {
@@ -105,4 +105,58 @@ export const  colors = [
    "#33FFEB"
 ];
  
+
+
+export const categories :ICategory[] = [
+  {
+    id: uuid(),
+    name: "Nike",
+    imageUrl: "https://images.unsplash.com/photo-1542291026-7eec26c4c77f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wWDd8fGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "T-Shirt",
+    imageUrl: "https://images.unsplash.com/photo-1576566588028-414f73842f27?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Clothes",
+    imageUrl: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "PC Desktop",
+    imageUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Shoes",
+    imageUrl: "https://images.unsplash.com/photo-1500048800687-8f4fec67e0a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Accessories",
+    imageUrl: "https://images.unsplash.com/photo-1506812574058-fc75fa93fead?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Watches",
+    imageUrl: "https://images.unsplash.com/photo-1549057446-9f5d2d1a52c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Hats",
+    imageUrl: "https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Sunglasses",
+    imageUrl: "https://images.unsplash.com/photo-1518518822076-5b37d3b09dd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  },
+  {
+    id: uuid(),
+    name: "Bags",
+    imageUrl: "https://images.unsplash.com/photo-1519923043430-7d16018b8fbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wdWYwfGVufDB8fHx8",
+  }
+];
 

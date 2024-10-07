@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 
 interface IProps extends HTMLAttributes<HTMLDivElement>{
-    color: string;
+  color: string;
 }
 
 function CircleColor ({color,...rest}:IProps) {

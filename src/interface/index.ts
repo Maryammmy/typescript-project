@@ -13,7 +13,12 @@
   
 export interface IInputForm{
     id: string;
-    name: "title" | "description" | "imageUrl" | "price"
+  name: "title" | "description" | "imageUrl" | "price";
     type: string;
     label: string;
+}
+export interface ICategory {
+  id: string | undefined;
+  name: string;
+  imageUrl: string;
   }
