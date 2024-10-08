@@ -12,6 +12,7 @@ import { v4 as uuid } from "uuid";
 import Select from "./components/ui/Select"
 import ErrorMsgColor from "./components/ErrorMsgColor"
 import { TProductName } from "./types"
+import toast, { Toaster } from "react-hot-toast"
 
 
 
@@ -31,13 +32,16 @@ function App() {
   }
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
+  const [isOpenRemoveModal, setIsOpenRemoveModal] = useState(false)
   const [product, setProduct] = useState<Item>(defaultProduct)
   const [products, setProducts] = useState<Item[]>(items)
   const [productToEdit,setProductToEdit] =useState<Item>(defaultProduct)
   const [tempColors, setTempColors] = useState<string[]>([])
   const [errorColor,setErrorColor]=useState<string>("")
   const [selected, setSelected] = useState(categories[0])
-  const [productIndex,setProductIndex]=useState<number>(0)
+  const [productIndex, setProductIndex] = useState<number>(0)
+  const [productIdToRemove, setProductIdToRemove] = useState<string | undefined>("");
+
   const [errors, setErrors] = useState({
     title:"",
     description:"",
@@ -77,6 +81,30 @@ function App() {
   function closeEditModal() {
     setIsOpenEditModal(false)
   }
+  function openRemoveModal() {
+    setIsOpenRemoveModal(true)
+  }
+  function closeRemoveModal() {
+    setIsOpenRemoveModal(false)
+  }
+  function removeProduct() {
+    setProducts(prev => prev.filter(product => product.id !== productIdToRemove));
+    closeRemoveModal();
+    toast('product removed succcessfully!',
+      {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      }
+    );
+  }
+  function handleOpenRemoveModal(id: string | undefined) {
+    setProductIdToRemove(id); 
+  }
+    
   function cancelForm(): void {
     setProduct(defaultProduct)
     setTempColors([])
@@ -103,6 +131,16 @@ function App() {
       setErrors(errors); 
       return; 
     }
+    toast('product added succcessfully!',
+      {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      }
+    );
     setProducts(prev => [{ ...product, id: uuid(), color: tempColors,category:selected }, ...prev])
     setProduct(defaultProduct)
     setTempColors([])
@@ -126,11 +164,21 @@ function App() {
     const updatedProducts = [...products]
     updatedProducts[productIndex] = { ...productToEdit,color:tempColors.concat(productToEdit.color) };
     setProducts(updatedProducts)
+    toast('product updated succcessfully!',
+      {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      }
+    );
     setProduct(defaultProduct)
     setTempColors([])
     closeEditModal()
   }
-  const productList = products.map((product, index) => <ProductCard key={index} index={index} product={product} setProductToEdit={setProductToEdit } openEditModal={openEditModal} setProductIndex={setProductIndex} />)
+  const productList = products.map((product, index) => <ProductCard key={index} index={index} handleOpenRemoveModal={handleOpenRemoveModal} product={product} setProductToEdit={setProductToEdit } openEditModal={openEditModal} setProductIndex={setProductIndex} openRemoveModal={openRemoveModal}  />)
 
    const form = inputForm.map(input => <div key={input.id} className="flex flex-col">
     <label htmlFor={input.id}>{input.label}</label>
@@ -169,6 +217,7 @@ function App() {
   </div>
   }
   return (
+    <>
     <main className="container">
       <Button className="bg-blue-500  hover:bg-blue-400" onClick={open}>Add</Button>
     <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
@@ -213,7 +262,16 @@ function App() {
         </form>
     
       </Modal>
+      <Modal isOpen={isOpenRemoveModal} close={closeRemoveModal} title="Remove product">
+<h3 className="font-medium  py-3">Are you sure you want to remove this product</h3>
+<div className="flex justify-between space-x-3">
+        <Button className="bg-red-500  hover:bg-red-400" type="button" onClick={closeRemoveModal}>Cancel</Button>
+        <Button className="bg-blue-500  hover:bg-blue-400" onClick={removeProduct}>Remove</Button>
+       </div>
+      </Modal>
       </main>
+      <Toaster/>
+      </>
   )
 }
 

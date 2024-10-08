@@ -9,3 +9,14 @@ export const textSlicer = (text:string, limit:number = 50) => {
     if (text.length >= limit) return `${text.slice(0, limit)} ...`;
     return text;
 };
+
+/**
+ * Adds commas to a given number for better readability.
+ *
+ * @param {string} x - The number to be formatted.
+ * @returns {string} The formatted number with commas.
+ */
+export function numberWithCommas(x: string): string {
+    return x?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  
