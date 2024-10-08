@@ -11,7 +11,6 @@ import { Item } from "./interface"
 import { v4 as uuid } from "uuid";
 import Select from "./components/ui/Select"
 import ErrorMsgColor from "./components/ErrorMsgColor"
-import { Label } from '@headlessui/react';
 import { TProductName } from "./types"
 
 
@@ -169,8 +168,6 @@ function App() {
     <ErrorMsg msg={errors[name]} />
   </div>
   }
-  console.log("edtit",productToEdit.color)
-  console.log("temp",tempColors)
   return (
     <main className="container">
       <Button className="bg-blue-500  hover:bg-blue-400" onClick={open}>Add</Button>
@@ -201,7 +198,7 @@ function App() {
           {renderEditForm("description", "Product Description", "description")}
           {renderEditForm("imageUrl", "Product Image Url", "imageUrl")}
           {renderEditForm("price", "Product Price", "price")}
-          {/* <Select selected={selected} setSelected={setSelected} /> */}
+          <Select selected={productToEdit.category} setSelected={(value)=>setProductToEdit(prev=>({...prev,category:value}))} />
           <ErrorMsgColor errorColor={errorColor}/>
           <div className="flex flex-wrap gap-1">
             {colorsList}

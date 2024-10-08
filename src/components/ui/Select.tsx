@@ -7,9 +7,11 @@ import { categories } from '../../data'
 import { ICategory } from '../../interface'
 
 interface IProps{
-  selected: ICategory;
-  setSelected: (category: ICategory) => void;
+  selected: {name:string,imageUrl:string};
+  setSelected: (category:ICategory) => void;
 }
+
+
 
 export default function Select({selected,setSelected}:IProps) {
   
